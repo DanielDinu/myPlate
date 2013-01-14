@@ -7,15 +7,41 @@
 //
 
 #import "MPAppDelegate.h"
-
+#import "Reachability.h"
 @implementation MPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"TermsAccepted"]!=YES)
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"TermsAccepted"];
+    
+    
+   }
     // Override point for customization after application launch.
+   
+    
+	// Let the device know we want to receive push notifications
+    NSLog(@"notif");
+	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    UIRemoteNotificationType enabledTypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+    NSLog(@"%@",enabledTypes);
     return YES;
+
 }
-							
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+	NSLog(@"My token is: %@", deviceToken);
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

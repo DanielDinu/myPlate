@@ -17,7 +17,8 @@
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
-   
+    
+   UIRemoteNotificationType enabledTypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
    
        }
 

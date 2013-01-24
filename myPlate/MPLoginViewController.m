@@ -10,6 +10,8 @@
 #import "MPMainMenuViewController.h"
 #import "Reachability.h"
 #import "MPEditPersonalViewController.h"
+#import "MPAppDelegate.h"
+
 @interface MPLoginViewController ()
 
 @end
@@ -19,7 +21,7 @@
 @synthesize signUpButton;
 @synthesize passwordTextField;
 @synthesize SignInButton;
-
+@synthesize tokenDev;
 
 //pentru cand se schimba textul din casuta username
 -(IBAction)didChangeUsernameText:(id)sender
@@ -201,10 +203,13 @@
 }
 
 
-
+NSString *devToken;
 NSString *user_id;
 - (IBAction)loginButtonClicked:(id)sender {
-    NSString *post2=[NSString stringWithFormat:@"user=%@&pass=%@",usernameTextField.text,passwordTextField.text];
+    
+    devToken = [((MPAppDelegate *)[UIApplication sharedApplication].delegate).devTtrimis description];
+    NSLog(devToken);
+    NSString *post2=[NSString stringWithFormat:@"user=%@&pass=%@&token=%@",usernameTextField.text,passwordTextField.text,devToken];
     NSLog(@"post string is :%@",post2);
     NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
@@ -229,7 +234,9 @@ NSString *user_id;
    
     if([output isEqualToString:@"SUCCESS"])
     {
-        
+        [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"logat"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
          NSString *user_id_primit = [incoming objectAtIndex:1];
         [[NSUserDefaults standardUserDefaults] setObject:user_id_primit forKey:@"userid"];
         NSString *post=[NSString stringWithFormat:@"id=%@",user_id_primit];

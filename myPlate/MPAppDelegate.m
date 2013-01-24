@@ -8,8 +8,11 @@
 
 #import "MPAppDelegate.h"
 #import "Reachability.h"
+#import "MPLoginViewController.h"
 @implementation MPAppDelegate
+@synthesize devTtrimis;
 
+////////////////////////////////////////////////////////////////////////////////
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
@@ -19,28 +22,63 @@
     
     
    }
-    // Override point for customization after application launch.
-   
     
-	// Let the device know we want to receive push notifications
-    NSLog(@"notif");
-	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    UIRemoteNotificationType enabledTypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-    NSLog(@"%@",enabledTypes);
+  	[application registerForRemoteNotificationTypes:
+     UIRemoteNotificationTypeBadge |
+     UIRemoteNotificationTypeAlert |
+     UIRemoteNotificationTypeSound];
+    
+    // Let the device know we want to receive push notifications
     return YES;
-
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
+    
 	NSLog(@"My token is: %@", deviceToken);
+    devTtrimis = deviceToken;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+NSString *logat=@"yes";
+NSString *verifLogat;
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    
+verifLogat = [[NSUserDefaults standardUserDefaults] valueForKey:@"logat"];
+    if([verifLogat isEqualToString:logat]){
+    for (id key in userInfo) {
+        NSLog(@"key: %@, value: %@", key, [userInfo objectForKey:key]);
+      
+        
+        NSDictionary *aps = [NSDictionary dictionaryWithDictionary:(NSDictionary *) [userInfo objectForKey:key] ];
+        
+            id mesaj = [aps objectForKey:@"alert"];
+            if([mesaj isKindOfClass:[NSString class]]) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Friend Request! "
+                                                                                                              message:mesaj  delegate:self
+                                                                                                    cancelButtonTitle:@"Close"
+                                                                                                    otherButtonTitles:@"Show", nil];
+                [alertView show];}
+            
+                        
+    }}}
+
+////////////////////////////////////////////////////////////////////////////////
+
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
 	NSLog(@"Failed to get token, error: %@", error);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

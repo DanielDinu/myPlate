@@ -10,10 +10,12 @@
 
 @interface MPLoginViewController : UIViewController<UITextFieldDelegate>
 {
+    NSData *devToken;
     IBOutlet UIScrollView *theScrollView;
     UITextField *activeTextField;
 }
 - (IBAction)dismissKeyboard:(id)sender;
+@property (strong, nonatomic) NSData *tokenDev;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 - (IBAction)didChangeUsernameText:(id)sender;

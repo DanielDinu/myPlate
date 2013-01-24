@@ -407,7 +407,7 @@
             <objects>
                 <viewController storyboardIdentifier="Mai" id="CE9-b1-VKX" customClass="MPMainMenuViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W2D-HB-8mh">
-                        <rect key="frame" x="0.0" y="44" width="320" height="436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPP-LA-bM3">
@@ -570,7 +570,7 @@
             <objects>
                 <viewController title="Find/Scan plates" id="hIT-ZQ-NB8" customClass="MPFindScanViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l1x-FC-fJu">
-                        <rect key="frame" x="0.0" y="44" width="320" height="436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JOk-B5-1zk">
@@ -578,6 +578,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7LR-Gx-THn">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="176" id="Pk0-xj-lVw"/>
+                                            <constraint firstAttribute="height" constant="43" id="jpw-nm-xtA"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -603,15 +604,29 @@
                                             <action selector="sendScan:" destination="hIT-ZQ-NB8" eventType="touchUpInside" id="XDR-BS-ixa"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJs-M2-tJW">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="260" id="3qc-VQ-ixd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Scan">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="1fF-re-0zz" firstAttribute="top" secondItem="7LR-Gx-THn" secondAttribute="top" type="default" id="AjX-FX-tfZ"/>
-                                    <constraint firstItem="1fF-re-0zz" firstAttribute="leading" secondItem="JOk-B5-1zk" secondAttribute="leading" constant="227" id="Bse-f0-Da0"/>
+                                    <constraint firstItem="1fF-re-0zz" firstAttribute="top" secondItem="JOk-B5-1zk" secondAttribute="top" constant="217" id="CD9-Xf-ega"/>
                                     <constraint firstItem="7LR-Gx-THn" firstAttribute="top" secondItem="JOk-B5-1zk" secondAttribute="top" constant="218" id="HPQ-w3-ZEs"/>
                                     <constraint firstAttribute="trailing" secondItem="1fF-re-0zz" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="LPD-Tx-oA2"/>
                                     <constraint firstItem="7LR-Gx-THn" firstAttribute="leading" secondItem="JOk-B5-1zk" secondAttribute="leading" constant="40" id="MHi-2V-X6u"/>
-                                    <constraint firstAttribute="bottom" secondItem="7LR-Gx-THn" secondAttribute="bottom" constant="175" id="kHp-A2-xAb"/>
-                                    <constraint firstItem="1fF-re-0zz" firstAttribute="bottom" secondItem="7LR-Gx-THn" secondAttribute="bottom" type="default" id="pKv-hV-rQN"/>
+                                    <constraint firstItem="LJs-M2-tJW" firstAttribute="top" secondItem="JOk-B5-1zk" secondAttribute="top" constant="281" id="Nfp-NG-fFa"/>
+                                    <constraint firstAttribute="trailing" secondItem="LJs-M2-tJW" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Qpa-XY-7cK"/>
+                                    <constraint firstItem="7LR-Gx-THn" firstAttribute="leading" secondItem="LJs-M2-tJW" secondAttribute="leading" type="default" id="lPa-Lq-dRA"/>
+                                    <constraint firstAttribute="bottom" secondItem="LJs-M2-tJW" secondAttribute="bottom" constant="156" id="wnJ-Fa-WFx"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -810,7 +825,7 @@
             <objects>
                 <viewController title="Map" id="Oko-YP-fPh" customClass="MPMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jOf-JX-5ac">
-                        <rect key="frame" x="0.0" y="44" width="320" height="436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oc8-pV-m6P"/>
@@ -1290,6 +1305,141 @@
             <point key="canvasLocation" x="3040" y="1688"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="MPCarDataViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPCarDataViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneButtonClicked:"/>
+                <relationship kind="action" name="takePhotoButtonClicked:"/>
+                <relationship kind="action" name="uploadButtonClicked:"/>
+                <relationship kind="outlet" name="cityPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="colorText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="engineText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="modelPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="modelText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="modsText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="powerText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="regnumberText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="txtText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="uploadButtonClicked" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="MPEditCarViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPEditCarViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneButtonClicked:"/>
+                <relationship kind="action" name="takePhotoButtonClicked:"/>
+                <relationship kind="action" name="uploadButtonClicked:"/>
+                <relationship kind="outlet" name="cityPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="colorText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="engineText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="modelPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="modelText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="modsText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="powerText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="regnumberText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="txtText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="uploadButtonClicked" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="MPEditPersonalViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPEditPersonalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="nextButtonClicked:"/>
+                <relationship kind="action" name="saveEdit:"/>
+                <relationship kind="action" name="segmentedControlIndexChanged:"/>
+                <relationship kind="outlet" name="ageTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="nextButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="pickPasswordTextfield" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="pickUserNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="repeatPickPasswordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="screenNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="shortBioTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="MPFindScanViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPFindScanViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dismissKeyboard:"/>
+                <relationship kind="action" name="editingChanged:" candidateClass="UITextField"/>
+                <relationship kind="action" name="sendScan:"/>
+                <relationship kind="outlet" name="scanTextfield" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="sendScan" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="MPFriendViewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPFriendViewViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addFriend:"/>
+                <relationship kind="outlet" name="ageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="colorLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="engineLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="genderLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="makeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="modelLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="pozaFriend" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="regNumberLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="shortbioLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MPLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPLoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="SignInButtonClicked:"/>
+                <relationship kind="action" name="didChangeUsernameText:"/>
+                <relationship kind="action" name="dismissKeyboard:"/>
+                <relationship kind="action" name="loginButtonClicked:"/>
+                <relationship kind="outlet" name="LogInButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="SignInButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="signUpButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MPMainMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPMainMenuViewController.h"/>
+        </class>
+        <class className="MPMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="mapview" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="MPPersonalDataViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPPersonalDataViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="nextButtonClicked:"/>
+                <relationship kind="action" name="segmentedControlIndexChanged:"/>
+                <relationship kind="outlet" name="ageTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="nextButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="pickPasswordTextfield" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="pickUserNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="repeatPickPasswordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="screenNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="shortBioTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="MPSplashViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPSplashViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="acceptButtonClicked:"/>
+                <relationship kind="outlet" name="acceptButtonClicked" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -1297,6 +1447,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="A32-u7-VD4"/>
-        <segue reference="Eor-mf-Cim"/>
+        <segue reference="qF2-Vr-3cq"/>
     </inferredMetricsTieBreakers>
 </document>

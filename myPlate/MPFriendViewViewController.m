@@ -87,7 +87,7 @@
 
 - (IBAction)addFriend:(id)sender {
  
-    NSString *post2=[NSString stringWithFormat:@"tip=request&id1=%@&id2=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"],[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]];
+    NSString *post2=[NSString stringWithFormat:@"tip=request&user_ID1=%@&user_ID2=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"],[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]];
     NSLog(@"post string is :%@",post2);
     NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     

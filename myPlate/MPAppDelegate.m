@@ -9,6 +9,7 @@
 #import "MPAppDelegate.h"
 #import "Reachability.h"
 #import "MPLoginViewController.h"
+#import "MPFindScanViewController.h"
 @implementation MPAppDelegate
 @synthesize devTtrimis;
 
@@ -17,11 +18,11 @@
 {
     
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"TermsAccepted"]!=YES)
-{
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"TermsAccepted"];
-    
-    
-   }
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"TermsAccepted"];
+        
+        
+    }
     
   	[application registerForRemoteNotificationTypes:
      UIRemoteNotificationTypeBadge |
@@ -31,9 +32,22 @@
     // Let the device know we want to receive push notifications
     return YES;
 }
-
 ////////////////////////////////////////////////////////////////////////////////
 
+- (void)alertView:(UIAlertView *)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0){
+        //cancel clicked ...do your action
+    }else if (buttonIndex == 1){
+        
+        NSLog(@"al doilea");//reset clicked
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        
+      
+        MPFindScanViewController *mpwho = [storyboard instantiateViewControllerWithIdentifier:@"whoAddedYou"];
+        _window.rootViewController = mpwho;}
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -45,30 +59,29 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-NSString *logat=@"yes";
 NSString *verifLogat;
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     
-verifLogat = [[NSUserDefaults standardUserDefaults] valueForKey:@"logat"];
-    if([verifLogat isEqualToString:logat]){
-    for (id key in userInfo) {
-        NSLog(@"key: %@, value: %@", key, [userInfo objectForKey:key]);
-      
-        
-        NSDictionary *aps = [NSDictionary dictionaryWithDictionary:(NSDictionary *) [userInfo objectForKey:key] ];
-        
+    verifLogat = [[NSUserDefaults standardUserDefaults] valueForKey:@"logat"];
+    if([verifLogat isEqualToString:@"yes"]){
+        for (id key in userInfo) {
+            NSLog(@"key: %@, value: %@", key, [userInfo objectForKey:key]);
+            
+            
+            NSDictionary *aps = [NSDictionary dictionaryWithDictionary:(NSDictionary *) [userInfo objectForKey:key] ];
+            
             id mesaj = [aps objectForKey:@"alert"];
             if([mesaj isKindOfClass:[NSString class]]) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Friend Request! "
-                                                                                                              message:mesaj  delegate:self
-                                                                                                    cancelButtonTitle:@"Close"
-                                                                                                    otherButtonTitles:@"Show", nil];
+                                                                    message:mesaj  delegate:self
+                                                          cancelButtonTitle:@"Close"
+                                                          otherButtonTitles:@"Show", nil];
                 [alertView show];}
             
-                        
-    }}}
+            
+        }}}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -88,7 +101,7 @@ verifLogat = [[NSUserDefaults standardUserDefaults] valueForKey:@"logat"];
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 

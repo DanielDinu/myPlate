@@ -161,7 +161,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:scanTextfield.text forKey:@"regNumber"];
     [[NSUserDefaults standardUserDefaults] synchronize];
   
-    NSString *post2=[NSString stringWithFormat:@"registration=%@",scanTextfield.text];
+    NSString *post2=[NSString stringWithFormat:@"search=registration&registration=%@",scanTextfield.text];
     NSLog(@"post string is :%@",post2);
     NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     

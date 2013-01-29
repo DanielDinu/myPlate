@@ -28,7 +28,7 @@
     
     
     NSString *regNumber = [[NSUserDefaults standardUserDefaults] valueForKey:@"regNumber"];
-    NSString *post2=[NSString stringWithFormat:@"registration=%@",regNumber];
+    NSString *post2=[NSString stringWithFormat:@"search=registration&registration=%@",regNumber];
     NSLog(@"post string is :%@",post2);
     NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     

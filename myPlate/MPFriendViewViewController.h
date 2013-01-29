@@ -23,6 +23,7 @@
     __weak IBOutlet UIImageView *pozaFriend;
        
 }
+@property (weak, nonatomic) IBOutlet UIButton *addFriendButton;
 - (IBAction)addFriend:(id)sender;
 
 @end

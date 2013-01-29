@@ -13,7 +13,7 @@
 @end
 
 @implementation MPFriendViewViewController
-
+@synthesize addFriendButton;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,6 +26,9 @@
 - (void)viewDidLoad
 {
     
+    
+    
+    ///////////////////////////////////////////////////////////////////////////////////
     
     NSString *regNumber = [[NSUserDefaults standardUserDefaults] valueForKey:@"regNumber"];
     NSString *post2=[NSString stringWithFormat:@"search=registration&registration=%@",regNumber];
@@ -77,6 +80,35 @@
     self.title = [date_user objectAtIndex:0];
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    ///////////////////////////////////////////////////////////////////////////
+    
+    NSString *post3=[NSString stringWithFormat:@"ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]];
+    NSLog(@"post string is :%@",post3);
+    NSData *postData3 = [post3 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength3 = [NSString stringWithFormat:@"%d", [postData3 length]];
+    
+    NSMutableURLRequest *cerere3 = [[NSMutableURLRequest alloc] init];
+    [cerere3 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/list_friends.php"]];
+    [cerere3 setHTTPMethod:@"POST"];
+    [cerere3 setValue:postLength3 forHTTPHeaderField:@"Content-Length"];
+    [cerere3 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [cerere3 setHTTPBody:postData3];
+    NSURLResponse* response3 = nil;
+    NSError* error3=nil;
+    NSData *serverReply3 = [NSURLConnection sendSynchronousRequest:cerere3 returningResponse:&response3 error:&error3];
+    NSString *replyString3 = [[NSString alloc] initWithBytes:[serverReply3 bytes] length:[serverReply3 length] encoding: NSASCIIStringEncoding];
+    NSLog(@"reply string is : %@",replyString3);
+    
+    NSArray *prieteni_user = [replyString3 componentsSeparatedByString:@"*~*"];
+    BOOL exista = [prieteni_user containsObject:[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]];
+    if(exista)
+    {
+        [addFriendButton setTitle:@"Friend" forState:UIControlStateNormal];
+        [addFriendButton setEnabled:NO];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,7 +118,35 @@
 }
 
 - (IBAction)addFriend:(id)sender {
- 
+    NSString *post3=[NSString stringWithFormat:@"ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]];
+    NSLog(@"post string is :%@",post3);
+    NSData *postData3 = [post3 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength3 = [NSString stringWithFormat:@"%d", [postData3 length]];
+    
+    NSMutableURLRequest *cerere3 = [[NSMutableURLRequest alloc] init];
+    [cerere3 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/list_friends.php"]];
+    [cerere3 setHTTPMethod:@"POST"];
+    [cerere3 setValue:postLength3 forHTTPHeaderField:@"Content-Length"];
+    [cerere3 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [cerere3 setHTTPBody:postData3];
+    NSURLResponse* response3 = nil;
+    NSError* error3=nil;
+    NSData *serverReply3 = [NSURLConnection sendSynchronousRequest:cerere3 returningResponse:&response3 error:&error3];
+    NSString *replyString3 = [[NSString alloc] initWithBytes:[serverReply3 bytes] length:[serverReply3 length] encoding: NSASCIIStringEncoding];
+    NSLog(@"reply string is : %@",replyString3);
+    
+    NSArray *prieteni_user = [replyString3 componentsSeparatedByString:@"*~*"];
+    BOOL exista = [prieteni_user containsObject:[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]];
+    NSLog(@"user prieten: %@",[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]);
+    if(exista)
+    {
+        [addFriendButton setTitle:@"Friend" forState:UIControlStateNormal];
+        [addFriendButton setEnabled:NO];
+        
+    }
+    else{
+
     NSString *post2=[NSString stringWithFormat:@"tip=request&user_ID1=%@&user_ID2=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"],[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]];
     NSLog(@"post string is :%@",post2);
     NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
@@ -104,6 +164,6 @@
     NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
     NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
     NSLog(@"reply string is : %@",replyString2);
-    
+    }
 }
 @end

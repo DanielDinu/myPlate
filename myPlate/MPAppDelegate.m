@@ -40,7 +40,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         //cancel clicked ...do your action
     }else if (buttonIndex == 1){
         
-        NSLog(@"al doilea");//reset clicked
+        NSLog(@"se lanseaza mpwhoadded");//reset clicked
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         
@@ -73,6 +73,14 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             NSDictionary *aps = [NSDictionary dictionaryWithDictionary:(NSDictionary *) [userInfo objectForKey:key] ];
             
             id mesaj = [aps objectForKey:@"alert"];
+            NSString *id_who_added = [aps objectForKey:@"id"];
+            NSString *id_prietenie = [aps objectForKey:@"id_friend"];
+            [[NSUserDefaults standardUserDefaults] setObject:id_who_added forKey:@"id_who_added_you"];
+            [[NSUserDefaults standardUserDefaults] setObject:id_prietenie forKey:@"id_prietenie"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
+            NSLog(@"id = %@",id_who_added);
+            NSLog(@"id prietenie = %@",id_prietenie);
             if([mesaj isKindOfClass:[NSString class]]) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Friend Request! "
                                                                     message:mesaj  delegate:self

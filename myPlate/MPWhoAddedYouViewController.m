@@ -7,13 +7,14 @@
 //
 
 #import "MPWhoAddedYouViewController.h"
+#import "MPMainMenuViewController.h"
 
 @interface MPWhoAddedYouViewController ()
 
 @end
 
 @implementation MPWhoAddedYouViewController
-
+@synthesize addFriendButton;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -75,7 +76,30 @@
     pozaFriend.image = img;
     self.title = [date_user objectAtIndex:0];
     [super viewDidLoad];
-    [super viewDidLoad];
+    NSString *post3=[NSString stringWithFormat:@"ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]];
+    NSLog(@"post string is :%@",post3);
+    NSData *postData3 = [post3 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength3 = [NSString stringWithFormat:@"%d", [postData3 length]];
+    
+    NSMutableURLRequest *cerere3 = [[NSMutableURLRequest alloc] init];
+    [cerere3 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/list_friends.php"]];
+    [cerere3 setHTTPMethod:@"POST"];
+    [cerere3 setValue:postLength3 forHTTPHeaderField:@"Content-Length"];
+    [cerere3 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [cerere3 setHTTPBody:postData3];
+    NSURLResponse* response3 = nil;
+    NSError* error3=nil;
+    NSData *serverReply3 = [NSURLConnection sendSynchronousRequest:cerere3 returningResponse:&response3 error:&error3];
+    NSString *replyString3 = [[NSString alloc] initWithBytes:[serverReply3 bytes] length:[serverReply3 length] encoding: NSASCIIStringEncoding];
+    NSLog(@"reply string is : %@",replyString3);
+    
+    NSArray *prieteni_user = [replyString3 componentsSeparatedByString:@"*~*"];
+    BOOL exista = [prieteni_user containsObject:[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]];
+    /*if(exista)
+    {[addFriendButton setTitle:@"Friend" forState:UIControlStateNormal];
+        [addFriendButton setEnabled:NO];}*/
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -86,6 +110,7 @@
 }
 
 - (IBAction)acceptFriend:(id)sender {
+   
     NSString *post2=[NSString stringWithFormat:@"tip=accept&request_ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"id_prietenie"]];
     NSLog(@"post string is :%@",post2);
     NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
@@ -102,9 +127,34 @@
     NSError* error2=nil;
     NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
     NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
-    NSLog(@"reply string is : %@",replyString2);
+        NSLog(@"reply string is : %@",replyString2);
+           
+    MPMainMenuViewController *mpm = [[MPMainMenuViewController alloc] initWithNibName:nil bundle:nil];
+
+  [self.navigationController pushViewController:mpm animated:YES];
+    
 }
 
 - (IBAction)rejectFriend:(id)sender {
+    
+    NSString *post2=[NSString stringWithFormat:@"tip=delete&ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"id_prietenie"]];
+    NSLog(@"post string is :%@",post2);
+    NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength2 = [NSString stringWithFormat:@"%d", [postData2 length]];
+    
+    NSMutableURLRequest *cerere2 = [[NSMutableURLRequest alloc] init];
+    [cerere2 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/friend.php"]];
+    [cerere2 setHTTPMethod:@"POST"];
+    [cerere2 setValue:postLength2 forHTTPHeaderField:@"Content-Length"];
+    [cerere2 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [cerere2 setHTTPBody:postData2];
+    NSURLResponse* response2 = nil;
+    NSError* error2=nil;
+    NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
+    NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
+    NSLog(@"reply string is : %@",replyString2);
+    [addFriendButton setTitle:@"Add Friend" forState:UIControlStateNormal];
+    [addFriendButton setEnabled:YES];
 }
 @end

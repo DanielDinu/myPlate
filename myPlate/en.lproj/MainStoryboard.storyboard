@@ -405,7 +405,7 @@
         <!--Main Menu View Controller - Main Menu-->
         <scene sceneID="Dpl-VD-lBE">
             <objects>
-                <viewController storyboardIdentifier="Mai" id="CE9-b1-VKX" customClass="MPMainMenuViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainMenu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CE9-b1-VKX" customClass="MPMainMenuViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W2D-HB-8mh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -439,6 +439,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="GIZ-XG-Gbo" kind="push" id="LGo-Py-gcU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcJ-gm-mjc">
                                 <constraints>
@@ -564,6 +567,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3MP-aB-wAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1890" y="635"/>
+        </scene>
+        <!--Friend List View Controller - Friend list-->
+        <scene sceneID="EHu-bX-ozx">
+            <objects>
+                <viewController title="Friend list" wantsFullScreenLayout="YES" id="GIZ-XG-Gbo" customClass="MPFriendListViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PbL-Ag-Qf9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Gqq-1T-PsK">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="clp-Ra-tL4" style="IBUITableViewCellStyleDefault" id="uch-YR-LRc">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="titlu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clp-Ra-tL4">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GIZ-XG-Gbo" id="Ocy-FJ-KNd"/>
+                                    <outlet property="delegate" destination="GIZ-XG-Gbo" id="nPg-JF-NQ5"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Gqq-1T-PsK" firstAttribute="trailing" secondItem="PbL-Ag-Qf9" secondAttribute="trailing" type="default" id="Jv6-bX-Mrw"/>
+                            <constraint firstItem="Gqq-1T-PsK" firstAttribute="top" secondItem="PbL-Ag-Qf9" secondAttribute="top" type="default" id="X02-AH-bHk"/>
+                            <constraint firstItem="Gqq-1T-PsK" firstAttribute="bottom" secondItem="PbL-Ag-Qf9" secondAttribute="bottom" type="default" id="bEU-UW-Ubi"/>
+                            <constraint firstItem="Gqq-1T-PsK" firstAttribute="leading" secondItem="PbL-Ag-Qf9" secondAttribute="leading" type="default" id="n6K-r7-vfS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="FIx-WT-ZdM"/>
+                    <connections>
+                        <outlet property="tableView" destination="Gqq-1T-PsK" id="I4j-g9-7j2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FiN-yE-e2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1359" y="1323"/>
         </scene>
         <!--Find Scan View Controller - Find/Scan plates-->
         <scene sceneID="RCZ-cP-iLf">
@@ -1471,6 +1525,7 @@
                     <navigationItem key="navigationItem" id="MYd-5L-ArM"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="addFriendButton" destination="wlb-Pt-cG8" id="RWp-hj-F6X"/>
                         <outlet property="ageLabel" destination="OQP-Vy-vBt" id="c61-nv-0hL"/>
                         <outlet property="colorLabel" destination="iLe-eH-OX3" id="QQs-at-8cj"/>
                         <outlet property="engineLabel" destination="Ttd-fe-VbE" id="4pA-fb-c7t"/>
@@ -1481,11 +1536,12 @@
                         <outlet property="pozaFriend" destination="FTr-yX-CR8" id="Abl-lZ-bZv"/>
                         <outlet property="regNumberLabel" destination="Lru-DL-v41" id="uqT-1i-nAO"/>
                         <outlet property="shortbioLabel" destination="RxF-P3-HDd" id="QWT-xA-KEB"/>
+                        <segue destination="CE9-b1-VKX" kind="push" identifier="LoginToMenu" id="SDK-ta-YUM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nPs-BE-T60" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2733" y="2001"/>
+            <point key="canvasLocation" x="1890" y="1979"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -1495,6 +1551,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="A32-u7-VD4"/>
-        <segue reference="qF2-Vr-3cq"/>
+        <segue reference="SDK-ta-YUM"/>
     </inferredMetricsTieBreakers>
 </document>

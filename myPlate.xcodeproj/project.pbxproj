@@ -26,6 +26,7 @@
 		3358A532167764C3009002C7 /* MPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3358A531167764C3009002C7 /* MPLoginViewController.m */; };
 		3358AE5E16B1709200E3C339 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3358AE5D16B1709200E3C339 /* CoreData.framework */; };
 		3367692216B7E0F2001124CE /* MPWhoAddedYouViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3367692116B7E0F2001124CE /* MPWhoAddedYouViewController.m */; };
+		3392B2C816B9394F0040928F /* MPFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3392B2C716B9394F0040928F /* MPFriendListViewController.m */; };
 		339D79E516AE9996009E8CC0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 339D79E416AE9996009E8CC0 /* OpenGLES.framework */; };
 		339D79E716AE99A9009E8CC0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 339D79E616AE99A9009E8CC0 /* QuartzCore.framework */; };
 		33B179BD167FACF7008AC42C /* MPMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B179BC167FACF7008AC42C /* MPMapViewController.m */; };
@@ -68,6 +69,8 @@
 		3358AE5D16B1709200E3C339 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3367692016B7E0F2001124CE /* MPWhoAddedYouViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWhoAddedYouViewController.h; sourceTree = "<group>"; };
 		3367692116B7E0F2001124CE /* MPWhoAddedYouViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWhoAddedYouViewController.m; sourceTree = "<group>"; };
+		3392B2C616B9394F0040928F /* MPFriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPFriendListViewController.h; sourceTree = "<group>"; };
+		3392B2C716B9394F0040928F /* MPFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPFriendListViewController.m; sourceTree = "<group>"; };
 		339D79E416AE9996009E8CC0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		339D79E616AE99A9009E8CC0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		33B179BB167FACF7008AC42C /* MPMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPMapViewController.h; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				33DD5A73169F02C80073B078 /* MPFriendViewViewController.m */,
 				3367692016B7E0F2001124CE /* MPWhoAddedYouViewController.h */,
 				3367692116B7E0F2001124CE /* MPWhoAddedYouViewController.m */,
+				3392B2C616B9394F0040928F /* MPFriendListViewController.h */,
+				3392B2C716B9394F0040928F /* MPFriendListViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				33FFBF78169D94EE0077C9C3 /* MPFindScanViewController.m in Sources */,
 				33DD5A74169F02C80073B078 /* MPFriendViewViewController.m in Sources */,
 				3367692216B7E0F2001124CE /* MPWhoAddedYouViewController.m in Sources */,
+				3392B2C816B9394F0040928F /* MPFriendListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

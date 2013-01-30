@@ -143,6 +143,8 @@
 }
 - (void)viewDidLoad
 {
+    usernameTextField.text =@"dani";
+    passwordTextField.text =@"daniel";
     Reachability *r = [Reachability reachabilityWithHostName:@"www.google.com"];
     NetworkStatus internetStatus = [r currentReachabilityStatus];
     

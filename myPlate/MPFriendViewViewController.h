@@ -25,5 +25,6 @@
 }
 @property (weak, nonatomic) IBOutlet UIButton *addFriendButton;
 - (IBAction)addFriend:(id)sender;
+- (IBAction)unfriend:(id)sender;
 
 @end

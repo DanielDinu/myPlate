@@ -136,8 +136,7 @@
 }
 
 - (IBAction)rejectFriend:(id)sender {
-    
-    NSString *post2=[NSString stringWithFormat:@"tip=delete&ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"id_prietenie"]];
+    NSString *post2=[NSString stringWithFormat:@"tip=check&user_ID1=%@&user_ID2=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"],[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]];
     NSLog(@"post string is :%@",post2);
     NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
@@ -154,6 +153,7 @@
     NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
     NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
     NSLog(@"reply string is : %@",replyString2);
+    
     [addFriendButton setTitle:@"Add Friend" forState:UIControlStateNormal];
     [addFriendButton setEnabled:YES];
 }

@@ -71,25 +71,50 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             
             
             NSDictionary *aps = [NSDictionary dictionaryWithDictionary:(NSDictionary *) [userInfo objectForKey:key] ];
+            NSString *tip = [aps objectForKey:@"tip"];
             
-            id mesaj = [aps objectForKey:@"alert"];
-            NSString *id_who_added = [aps objectForKey:@"id"];
-            NSString *id_prietenie = [aps objectForKey:@"id_friend"];
-            [[NSUserDefaults standardUserDefaults] setObject:id_who_added forKey:@"id_who_added_you"];
-            [[NSUserDefaults standardUserDefaults] setObject:id_prietenie forKey:@"id_prietenie"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-
-            NSLog(@"id = %@",id_who_added);
-            NSLog(@"id prietenie = %@",id_prietenie);
-            if([mesaj isKindOfClass:[NSString class]]) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Friend Request! "
-                                                                    message:mesaj  delegate:self
-                                                          cancelButtonTitle:@"Close"
-                                                          otherButtonTitles:@"Show", nil];
-                [alertView show];}
+            NSLog(@"%@",tip);
+            if ([tip isEqualToString:@"friend"]) {
+                NSLog(@"FRIEND!");
+                id mesaj = [aps objectForKey:@"alert"];
+                NSString *id_who_added = [aps objectForKey:@"id"];
+                NSString *id_prietenie = [aps objectForKey:@"id_friend"];
+                [[NSUserDefaults standardUserDefaults] setObject:id_who_added forKey:@"id_who_added_you"];
+                [[NSUserDefaults standardUserDefaults] setObject:id_prietenie forKey:@"id_prietenie"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                NSLog(@"id = %@",id_who_added);
+                NSLog(@"id prietenie = %@",id_prietenie);
+                if([mesaj isKindOfClass:[NSString class]]) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Friend Request! "
+                                                                        message:mesaj  delegate:self
+                                                              cancelButtonTitle:@"Close"
+                                                              otherButtonTitles:@"Show", nil];
+                    [alertView show];
+                }}
+                
+/*------- */ else if([tip isEqualToString:@"message"]){
+                    NSLog(@"MESSAGE!");
+                    id mesaj = [aps objectForKey:@"alert"];
+                    NSString *id_who_added = [aps objectForKey:@"id"];
+                    NSString *id_prietenie = [aps objectForKey:@"id_friend"];
+                    [[NSUserDefaults standardUserDefaults] setObject:id_who_added forKey:@"id_who_added_you"];
+                    [[NSUserDefaults standardUserDefaults] setObject:id_prietenie forKey:@"id_prietenie"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+                    NSLog(@"id = %@",id_who_added);
+                    NSLog(@"id prietenie = %@",id_prietenie);
+                    if([mesaj isKindOfClass:[NSString class]]) {
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Message !"
+                                                                            message:mesaj  delegate:self
+                                                                  cancelButtonTitle:@"Close"
+                                                                  otherButtonTitles:@"Show", nil];
+                        [alertView show];
+ 
+                    }}
+     
             
-            
-        }}}
+            }}}
 
 ////////////////////////////////////////////////////////////////////////////////
 

@@ -166,4 +166,42 @@
     NSLog(@"reply string is : %@",replyString2);
     }
 }
+
+- (IBAction)unfriend:(id)sender {
+    NSString *post4=[NSString stringWithFormat:@"tip=check&user_ID1=%@&user_ID2=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"],[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]];
+    NSLog(@"post string is :%@",post4);
+    NSData *postData4 = [post4 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength4 = [NSString stringWithFormat:@"%d", [postData4 length]];
+    
+    NSMutableURLRequest *cerere4 = [[NSMutableURLRequest alloc] init];
+    [cerere4 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/friend.php"]];
+    [cerere4 setHTTPMethod:@"POST"];
+    [cerere4 setValue:postLength4 forHTTPHeaderField:@"Content-Length"];
+    [cerere4 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [cerere4 setHTTPBody:postData4];
+    NSURLResponse* response4 = nil;
+    NSError* error4=nil;
+    NSData *serverReply4 = [NSURLConnection sendSynchronousRequest:cerere4 returningResponse:&response4 error:&error4];
+    NSString *replyString4 = [[NSString alloc] initWithBytes:[serverReply4 bytes] length:[serverReply4 length] encoding: NSASCIIStringEncoding];
+    NSLog(@"reply string is : %@",replyString4);
+    
+    NSString *post2=[NSString stringWithFormat:@"tip=delete&ID=%@", replyString4];
+    NSLog(@"post string is :%@",post2);
+    NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength2 = [NSString stringWithFormat:@"%d", [postData2 length]];
+    
+    NSMutableURLRequest *cerere2 = [[NSMutableURLRequest alloc] init];
+    [cerere2 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/friend.php"]];
+    [cerere2 setHTTPMethod:@"POST"];
+    [cerere2 setValue:postLength2 forHTTPHeaderField:@"Content-Length"];
+    [cerere2 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [cerere2 setHTTPBody:postData2];
+    NSURLResponse* response2 = nil;
+    NSError* error2=nil;
+    NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
+    NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
+    NSLog(@"reply string is : %@",replyString2);
+}
 @end

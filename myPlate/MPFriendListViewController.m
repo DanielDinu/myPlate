@@ -22,9 +22,10 @@
     }
     return self;
 }
-
+NSArray *prieteni_user;
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    //CATI PRIETENI
     NSString *post3=[NSString stringWithFormat:@"ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]];
     NSLog(@"post string is :%@",post3);
     NSData *postData3 = [post3 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
@@ -42,21 +43,43 @@
     NSData *serverReply3 = [NSURLConnection sendSynchronousRequest:cerere3 returningResponse:&response3 error:&error3];
     NSString *replyString3 = [[NSString alloc] initWithBytes:[serverReply3 bytes] length:[serverReply3 length] encoding: NSASCIIStringEncoding];
     NSLog(@"reply string is : %@",replyString3);
-   NSArray *prieteni_user = [replyString3 componentsSeparatedByString:@"*~*"];
-    int numar_prieteni = [prieteni_user count];
-    NSLog(@"%d",numar_prieteni);
-    return numar_prieteni;
+   prieteni_user = [replyString3 componentsSeparatedByString:@"*~*"];
+   
+    
+
+    return [prieteni_user count];
+    
     
 }
+NSString *temp;
+NSArray *nume_prieteni;
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+int i=0;
+//////////////////////////////////////////////////////////////////////////////////////
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+       
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    return cell;
-}
+    NSLog(@"count prieteni: %lu",(unsigned long)[prieteni_user count]);
+    
+       //NSLog(@"prieteni useri: %@",prieteni_user);
+       temp = [prieteni_user objectAtIndex:i];
+    nume_prieteni = [temp componentsSeparatedByString:@"~;~"];
 
+    NSLog(@"temp: %@",temp);
+    cell.textLabel.text = [nume_prieteni objectAtIndex:1];
+    i++;
+        return cell;
+
+}
+////////////////////////////////////////////////////////////////////////////////////
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+       [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
 

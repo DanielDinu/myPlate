@@ -34,6 +34,7 @@
 		33B179C1167FBE56008AC42C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B179C0167FBE56008AC42C /* Security.framework */; };
 		33B179DA1680840A008AC42C /* MPMainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B179D916808409008AC42C /* MPMainMenuViewController.m */; };
 		33B1D9F4169C4685008FB09C /* MPEditCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1D9F3169C4685008FB09C /* MPEditCarViewController.m */; };
+		33B5611516C2663200EA84A2 /* MPMessageBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B5611416C2663200EA84A2 /* MPMessageBoxViewController.m */; };
 		33CA0C8A169AFD9A0000DB9F /* MPEditPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CA0C89169AFD9A0000DB9F /* MPEditPersonalViewController.m */; };
 		33DD5A74169F02C80073B078 /* MPFriendViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DD5A73169F02C80073B078 /* MPFriendViewViewController.m */; };
 		33F6CFAA167783C100377C58 /* MPPersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F6CFA9167783C100377C58 /* MPPersonalDataViewController.m */; };
@@ -81,6 +82,8 @@
 		33B179D916808409008AC42C /* MPMainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPMainMenuViewController.m; sourceTree = "<group>"; };
 		33B1D9F2169C4685008FB09C /* MPEditCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPEditCarViewController.h; sourceTree = "<group>"; };
 		33B1D9F3169C4685008FB09C /* MPEditCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPEditCarViewController.m; sourceTree = "<group>"; };
+		33B5611316C2663200EA84A2 /* MPMessageBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPMessageBoxViewController.h; sourceTree = "<group>"; };
+		33B5611416C2663200EA84A2 /* MPMessageBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPMessageBoxViewController.m; sourceTree = "<group>"; };
 		33CA0C88169AFD9A0000DB9F /* MPEditPersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPEditPersonalViewController.h; sourceTree = "<group>"; };
 		33CA0C89169AFD9A0000DB9F /* MPEditPersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPEditPersonalViewController.m; sourceTree = "<group>"; };
 		33DD5A72169F02C80073B078 /* MPFriendViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPFriendViewViewController.h; sourceTree = "<group>"; };
@@ -205,6 +208,8 @@
 				3367692116B7E0F2001124CE /* MPWhoAddedYouViewController.m */,
 				3392B2C616B9394F0040928F /* MPFriendListViewController.h */,
 				3392B2C716B9394F0040928F /* MPFriendListViewController.m */,
+				33B5611316C2663200EA84A2 /* MPMessageBoxViewController.h */,
+				33B5611416C2663200EA84A2 /* MPMessageBoxViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				33DD5A74169F02C80073B078 /* MPFriendViewViewController.m in Sources */,
 				3367692216B7E0F2001124CE /* MPWhoAddedYouViewController.m in Sources */,
 				3392B2C816B9394F0040928F /* MPFriendListViewController.m in Sources */,
+				33B5611516C2663200EA84A2 /* MPMessageBoxViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

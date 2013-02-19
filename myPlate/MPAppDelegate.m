@@ -5,6 +5,7 @@
 //  Created by Daniel Dinu on 12/11/12.
 //  Copyright (c) 2012 Daniel Dinu. All rights reserved.
 //
+#import <Parse/Parse.h>
 
 #import "MPAppDelegate.h"
 #import "Reachability.h"
@@ -16,6 +17,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [application registerForRemoteNotificationTypes:
+     UIRemoteNotificationTypeBadge |
+     UIRemoteNotificationTypeAlert |
+     UIRemoteNotificationTypeSound];
+    [Parse setApplicationId:@"BTYOHvvqjw5C6fNGUg2O0Vg6JYxr63Or4gSDKz74"
+                  clientKey:@"0RfdG07qabsNqrgDmNJWwc91mbjuTmkWU5TyE7hp"];
     
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"TermsAccepted"]!=YES)
     {
@@ -52,7 +59,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 ////////////////////////////////////////////////////////////////////////////////
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
-{
+{ PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
     
 	NSLog(@"My token is: %@", deviceToken);
     devTtrimis = deviceToken;
@@ -63,7 +72,7 @@ NSString *verifLogat;
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    
+    [PFPush handlePush:userInfo];
     verifLogat = [[NSUserDefaults standardUserDefaults] valueForKey:@"logat"];
     if([verifLogat isEqualToString:@"yes"]){
         for (id key in userInfo) {

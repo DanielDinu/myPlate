@@ -38,7 +38,6 @@
 		33B179DA1680840A008AC42C /* MPMainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B179D916808409008AC42C /* MPMainMenuViewController.m */; };
 		33B1D9F4169C4685008FB09C /* MPEditCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B1D9F3169C4685008FB09C /* MPEditCarViewController.m */; };
 		33B5611516C2663200EA84A2 /* MPMessageBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B5611416C2663200EA84A2 /* MPMessageBoxViewController.m */; };
-		33C1C41716D2807D005DFB94 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C1C41616D2807D005DFB94 /* Parse.framework */; };
 		33C1C41916D280A4005DFB94 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C1C41816D280A4005DFB94 /* AudioToolbox.framework */; };
 		33C1C41B16D280AA005DFB94 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C1C41A16D280AA005DFB94 /* Accounts.framework */; };
 		33C1C41D16D280B1005DFB94 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C1C41C16D280B1005DFB94 /* AdSupport.framework */; };
@@ -102,7 +101,6 @@
 		33B1D9F3169C4685008FB09C /* MPEditCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPEditCarViewController.m; sourceTree = "<group>"; };
 		33B5611316C2663200EA84A2 /* MPMessageBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPMessageBoxViewController.h; sourceTree = "<group>"; };
 		33B5611416C2663200EA84A2 /* MPMessageBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPMessageBoxViewController.m; sourceTree = "<group>"; };
-		33C1C41616D2807D005DFB94 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		33C1C41816D280A4005DFB94 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		33C1C41A16D280AA005DFB94 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		33C1C41C16D280B1005DFB94 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -150,7 +148,6 @@
 				33B179BF167FB6E5008AC42C /* MapKit.framework in Frameworks */,
 				3358A50A16775FF9009002C7 /* UIKit.framework in Frameworks */,
 				3358A50C16775FF9009002C7 /* Foundation.framework in Frameworks */,
-				33C1C41716D2807D005DFB94 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +183,6 @@
 				33C1C41C16D280B1005DFB94 /* AdSupport.framework */,
 				33C1C41A16D280AA005DFB94 /* Accounts.framework */,
 				33C1C41816D280A4005DFB94 /* AudioToolbox.framework */,
-				33C1C41616D2807D005DFB94 /* Parse.framework */,
 				3358AE5D16B1709200E3C339 /* CoreData.framework */,
 				339D79E616AE99A9009E8CC0 /* QuartzCore.framework */,
 				339D79E416AE9996009E8CC0 /* OpenGLES.framework */,

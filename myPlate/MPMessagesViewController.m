@@ -89,7 +89,8 @@
     return self;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [chatData count];
+	NSLog(@"%@",chatData);
+    return [chatData count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -134,7 +135,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-   NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"numePrieten"];
+   NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"screen"];
     if (textMessage.text.length>0) {
         NSLog(@"scrii");
         // updating the table immediately
@@ -149,8 +150,25 @@
         [tableView beginUpdates];
         [tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
         [tableView endUpdates];
-        [tableView reloadData];
+        //[tableView reloadData];
+       
+        NSString *post2=[NSString stringWithFormat:@"user_ID1=%@&user_ID2=%@&mes=%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"userid"],[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"],textMessage.text];
+        NSLog(@"post string is: %@",post2);
+        NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
+        NSString *postLength2 = [NSString stringWithFormat:@"%d", [postData2 length]];
+        
+        NSMutableURLRequest *cerere2 = [[NSMutableURLRequest alloc] init];
+        [cerere2 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/im.php"]];
+        [cerere2 setHTTPMethod:@"POST"];
+        [cerere2 setValue:postLength2 forHTTPHeaderField:@"Content-Length"];
+        [cerere2 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [cerere2 setHTTPBody:postData2];
+        NSURLResponse* response2 = nil;
+        NSError* error2=nil;
+        NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
+        NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
+        NSLog(@"reply string is : %@",replyString2);
            }
     textMessage.text = @"";
 
@@ -158,8 +176,77 @@
 
 }
 
+-(void)handleUpdatedData:(NSNotification *)notification {
+    NSLog(@"%@",notification);
+    NSObject *mesaj = [notification object];
+
+    NSDictionary *aps1 = [NSDictionary dictionaryWithDictionary:(NSDictionary *) mesaj ];
+    NSDictionary *aps2 = [NSDictionary dictionaryWithDictionary:(NSDictionary *) [aps1 objectForKey:@"aps"] ];
+
+
+
+    NSString *tip = [aps2 objectForKey:@"tip"];
+
+        if ([tip isEqualToString:@"friend"]) {
+            
+        }
+        
+        else if([tip isEqualToString:@"message"]){
+            id mesajPrimit = [aps2 objectForKey:@"alert"];
+            NSString *id_who_added = [aps2 objectForKey:@"id"];
+            [[NSUserDefaults standardUserDefaults] setObject:id_who_added forKey:@"id_who_added_you"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            NSLog(@"id = %@",id_who_added);
+            if([mesajPrimit isKindOfClass:[NSString class]]) {
+                
+                
+                NSString *post2=[NSString stringWithFormat:@"search=id&ID=%@",id_who_added];
+                NSLog(@"post string is: %@",post2);
+                NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+                
+                NSString *postLength2 = [NSString stringWithFormat:@"%d", [postData2 length]];
+                
+                NSMutableURLRequest *cerere2 = [[NSMutableURLRequest alloc] init];
+                [cerere2 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/search.php"]];
+                [cerere2 setHTTPMethod:@"POST"];
+                [cerere2 setValue:postLength2 forHTTPHeaderField:@"Content-Length"];
+                [cerere2 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+                [cerere2 setHTTPBody:postData2];
+                NSURLResponse* response2 = nil;
+                NSError* error2=nil;
+                NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
+                NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
+                NSLog(@"reply string is : %@",replyString2);
+                NSArray *prieteni_user = [replyString2 componentsSeparatedByString:@"*~*"];
+                NSString *numePrieten = [prieteni_user objectAtIndex:0];
+                
+                NSArray *keys = [NSArray arrayWithObjects:@"text", @"userName", @"date", nil];
+                NSArray *objects = [NSArray arrayWithObjects:mesajPrimit, numePrieten, [NSDate date], nil];
+                NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+                [chatData addObject:dictionary];
+                
+                NSMutableArray *insertIndexPaths = [[NSMutableArray alloc] init];
+                NSIndexPath *newPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                [insertIndexPaths addObject:newPath];
+                [tableView beginUpdates];
+                [tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
+                [tableView endUpdates];
+            }}
+    }
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@"false" forKey:@"inMessages"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 - (void)viewDidLoad
 {
+    [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"inMessages"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdatedData:) name:@"mesajNotif" object:nil];
+
     [self registerForKeyboardNotifications];
     chatData  = [[NSMutableArray alloc] init];
 

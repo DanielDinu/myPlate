@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
 #import "chatCell.h"
 
 @interface MPMessagesViewController : UIViewController<UITextFieldDelegate,UITableViewDelegate, UITableViewDataSource>

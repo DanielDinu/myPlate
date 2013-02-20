@@ -5,12 +5,12 @@
 //  Created by Daniel Dinu on 12/11/12.
 //  Copyright (c) 2012 Daniel Dinu. All rights reserved.
 //
-#import <Parse/Parse.h>
 
 #import "MPAppDelegate.h"
 #import "Reachability.h"
 #import "MPLoginViewController.h"
 #import "MPFindScanViewController.h"
+#import "MPMessagesViewController.h"
 @implementation MPAppDelegate
 @synthesize devTtrimis;
 
@@ -21,8 +21,6 @@
      UIRemoteNotificationTypeBadge |
      UIRemoteNotificationTypeAlert |
      UIRemoteNotificationTypeSound];
-    [Parse setApplicationId:@"BTYOHvvqjw5C6fNGUg2O0Vg6JYxr63Or4gSDKz74"
-                  clientKey:@"0RfdG07qabsNqrgDmNJWwc91mbjuTmkWU5TyE7hp"];
     
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"TermsAccepted"]!=YES)
     {
@@ -59,9 +57,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 ////////////////////////////////////////////////////////////////////////////////
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
-{ PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation saveInBackground];
+{ 
     
 	NSLog(@"My token is: %@", deviceToken);
     devTtrimis = deviceToken;
@@ -72,17 +68,16 @@ NSString *verifLogat;
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [PFPush handlePush:userInfo];
     verifLogat = [[NSUserDefaults standardUserDefaults] valueForKey:@"logat"];
     if([verifLogat isEqualToString:@"yes"]){
         for (id key in userInfo) {
-            NSLog(@"key: %@, value: %@", key, [userInfo objectForKey:key]);
+            //NSLog(@"key: %@, value: %@", key, [userInfo objectForKey:key]);
             
             
             NSDictionary *aps = [NSDictionary dictionaryWithDictionary:(NSDictionary *) [userInfo objectForKey:key] ];
             NSString *tip = [aps objectForKey:@"tip"];
             
-            NSLog(@"%@",tip);
+            //NSLog(@"%@",tip);
             if ([tip isEqualToString:@"friend"]) {
                 NSLog(@"FRIEND!");
                 id mesaj = [aps objectForKey:@"alert"];
@@ -92,18 +87,18 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                 [[NSUserDefaults standardUserDefaults] setObject:id_prietenie forKey:@"id_prietenie"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-                NSLog(@"id = %@",id_who_added);
-                NSLog(@"id prietenie = %@",id_prietenie);
+             //   NSLog(@"id = %@",id_who_added);
+              //  NSLog(@"id prietenie = %@",id_prietenie);
                 if([mesaj isKindOfClass:[NSString class]]) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Friend Request! "
+                    UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Friend Request! "
                                                                         message:mesaj  delegate:self
                                                               cancelButtonTitle:@"Close"
                                                               otherButtonTitles:@"Show", nil];
-                    [alertView show];
+                    [alertView1 show];
                 }}
                 
 /*------- */ else if([tip isEqualToString:@"message"]){
-                    NSLog(@"MESSAGE!");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"mesajNotif"object:userInfo];
                     id mesaj = [aps objectForKey:@"alert"];
                     NSString *id_who_added = [aps objectForKey:@"id"];
                     NSString *id_prietenie = [aps objectForKey:@"id_friend"];
@@ -111,16 +106,44 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                     [[NSUserDefaults standardUserDefaults] setObject:id_prietenie forKey:@"id_prietenie"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     
-                    NSLog(@"id = %@",id_who_added);
-                    NSLog(@"id prietenie = %@",id_prietenie);
+                //    NSLog(@"id = %@",id_who_added);
                     if([mesaj isKindOfClass:[NSString class]]) {
+                       MPMessagesViewController *mpmess = [[MPMessagesViewController alloc] initWithNibName:nil bundle:nil];
+
+                        if (_window.screen == mpmess){}
+                        else{
+                        
+                      
+                        NSString *post2=[NSString stringWithFormat:@"search=id&ID=%@",id_who_added];
+                        NSLog(@"post string is: %@",post2);
+                        NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+                        
+                        NSString *postLength2 = [NSString stringWithFormat:@"%d", [postData2 length]];
+                        
+                        NSMutableURLRequest *cerere2 = [[NSMutableURLRequest alloc] init];
+                        [cerere2 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/search.php"]];
+                        [cerere2 setHTTPMethod:@"POST"];
+                        [cerere2 setValue:postLength2 forHTTPHeaderField:@"Content-Length"];
+                        [cerere2 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+                        [cerere2 setHTTPBody:postData2];
+                        NSURLResponse* response2 = nil;
+                        NSError* error2=nil;
+                        NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
+                        NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
+                        NSLog(@"reply string is : %@",replyString2);
+                        NSArray *prieteni_user = [replyString2 componentsSeparatedByString:@"*~*"];
+                        NSString *numePrieten = [prieteni_user objectAtIndex:0];
+                        
+                            if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"userid"] isEqualToString:@"false"]) {
+                                
+                            
                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Message !"
-                                                                            message:mesaj  delegate:self
+                                                                            message:[NSString stringWithFormat:@"%@: %@", numePrieten, mesaj]  delegate:self
                                                                   cancelButtonTitle:@"Close"
                                                                   otherButtonTitles:@"Show", nil];
                         [alertView show];
  
-                    }}
+                            }}}}
      
             
             }}}

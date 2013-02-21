@@ -5,6 +5,8 @@
 //  Created by Daniel Dinu on 12/11/12.
 //  Copyright (c) 2012 Daniel Dinu. All rights reserved.
 //
+#define AlertViewOne 1
+#define AlertViewTwo 2
 
 #import "MPAppDelegate.h"
 #import "Reachability.h"
@@ -38,20 +40,29 @@
     return YES;
 }
 ////////////////////////////////////////////////////////////////////////////////
-
 - (void)alertView:(UIAlertView *)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0){
         //cancel clicked ...do your action
     }else if (buttonIndex == 1){
-        
+        if(alertView.tag == AlertViewOne)
+        {
         NSLog(@"se lanseaza mpwhoadded");//reset clicked
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         
       
         MPFindScanViewController *mpwho = [storyboard instantiateViewControllerWithIdentifier:@"whoAddedYou"];
-        _window.rootViewController = mpwho;}
+            _window.rootViewController = mpwho;}
+    else if(alertView.tag == AlertViewTwo
+            ) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        
+        
+        MPMessagesViewController *mpm = [storyboard instantiateViewControllerWithIdentifier:@"Messages"];
+        _window.rootViewController = mpm;
+        
+    }}
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -94,6 +105,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                                                                         message:mesaj  delegate:self
                                                               cancelButtonTitle:@"Close"
                                                               otherButtonTitles:@"Show", nil];
+                    alertView1.tag = AlertViewOne;
                     [alertView1 show];
                 }}
                 
@@ -108,11 +120,8 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                     
                 //    NSLog(@"id = %@",id_who_added);
                     if([mesaj isKindOfClass:[NSString class]]) {
-                       MPMessagesViewController *mpmess = [[MPMessagesViewController alloc] initWithNibName:nil bundle:nil];
 
-                        if (_window.screen == mpmess){}
-                        else{
-                        
+                                                
                       
                         NSString *post2=[NSString stringWithFormat:@"search=id&ID=%@",id_who_added];
                         NSLog(@"post string is: %@",post2);
@@ -134,16 +143,18 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                         NSArray *prieteni_user = [replyString2 componentsSeparatedByString:@"*~*"];
                         NSString *numePrieten = [prieteni_user objectAtIndex:0];
                         
-                            if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"userid"] isEqualToString:@"false"]) {
+                            if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"inMessages"] isEqualToString:@"false"]) {
                                 
                             
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Message !"
+                        UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:@"Message !"
                                                                             message:[NSString stringWithFormat:@"%@: %@", numePrieten, mesaj]  delegate:self
                                                                   cancelButtonTitle:@"Close"
                                                                   otherButtonTitles:@"Show", nil];
-                        [alertView show];
+                                alertView2.tag = AlertViewTwo;
+
+                        [alertView2 show];
  
-                            }}}}
+                            }}}
      
             
             }}}

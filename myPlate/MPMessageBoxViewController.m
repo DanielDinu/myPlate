@@ -99,11 +99,15 @@ NSArray *nume_prieteni;
     NSLog(@"reply string is : %@",replyString2);
     NSArray *prieteni_user = [replyString2 componentsSeparatedByString:@"*~*"];
     [[NSUserDefaults standardUserDefaults] setObject:[prieteni_user objectAtIndex:4] forKey:@"useridFriend"];
-    [[NSUserDefaults standardUserDefaults] setObject:[prieteni_user objectAtIndex:0] forKey:@"numePrieten"];
+    [[NSUserDefaults standardUserDefaults] setObject:[linie objectAtIndex:1] forKey:@"numePrieten"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 - (void)viewDidLoad
-{ NSString *post3=[NSString stringWithFormat:@"ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]];
+{
+    [self setTitle:@"Messages"];
+    NSString *post3=[NSString stringWithFormat:@"ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]];
     NSLog(@"post string is :%@",post3);
     NSData *postData3 = [post3 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     

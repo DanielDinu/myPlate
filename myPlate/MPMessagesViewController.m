@@ -240,8 +240,14 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"false" forKey:@"inMessages"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"numePrieten"]];
+
+}
 - (void)viewDidLoad
 {
+    [self setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"numePrieten"]];
     [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"inMessages"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

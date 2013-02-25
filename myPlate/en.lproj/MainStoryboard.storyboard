@@ -239,69 +239,44 @@
         <scene sceneID="thM-yx-VqC">
             <objects>
                 <viewController title="Message Box" id="Ide-xh-sFp" customClass="MPMessageBoxViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5zz-mV-2Tg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xcL-wq-eBT">
                         <rect key="frame" x="0.0" y="44" width="320" height="524"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U48-s9-fjT">
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xcL-wq-eBT">
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="436" id="mjW-cf-qAc"/>
-                                        </constraints>
-                                        <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="dSI-MI-QcF" style="IBUITableViewCellStyleDefault" id="5ka-fW-oe8">
-                                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSI-MI-QcF">
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <connections>
-                                                    <segue destination="c0Y-cM-jma" kind="push" id="JGh-tP-d8w"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <connections>
-                                            <outlet property="dataSource" destination="Ide-xh-sFp" id="Lc4-zG-Btt"/>
-                                            <outlet property="delegate" destination="Ide-xh-sFp" id="UUG-Xt-Ckh"/>
-                                        </connections>
-                                    </tableView>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="EF2-KO-Auv">
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="xcL-wq-eBT" firstAttribute="top" secondItem="EF2-KO-Auv" secondAttribute="bottom" type="default" id="05e-fp-djO"/>
-                                    <constraint firstItem="xcL-wq-eBT" firstAttribute="centerX" secondItem="U48-s9-fjT" secondAttribute="centerX" type="default" id="673-Xg-tXs"/>
-                                    <constraint firstItem="xcL-wq-eBT" firstAttribute="leading" secondItem="U48-s9-fjT" secondAttribute="leading" type="default" id="T67-ZG-bSW"/>
-                                    <constraint firstItem="EF2-KO-Auv" firstAttribute="leading" secondItem="U48-s9-fjT" secondAttribute="leading" type="default" id="eOY-dz-VAY"/>
-                                    <constraint firstItem="xcL-wq-eBT" firstAttribute="bottom" secondItem="U48-s9-fjT" secondAttribute="bottom" type="default" id="exE-07-tOo"/>
-                                    <constraint firstItem="EF2-KO-Auv" firstAttribute="top" secondItem="U48-s9-fjT" secondAttribute="top" type="default" id="l1O-E5-hQh"/>
-                                    <constraint firstItem="EF2-KO-Auv" firstAttribute="trailing" secondItem="U48-s9-fjT" secondAttribute="trailing" type="default" id="o8E-e8-d6C"/>
-                                    <constraint firstItem="xcL-wq-eBT" firstAttribute="trailing" secondItem="U48-s9-fjT" secondAttribute="trailing" type="default" id="sxc-Jq-SoQ"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="U48-s9-fjT" firstAttribute="leading" secondItem="5zz-mV-2Tg" secondAttribute="leading" type="default" id="4X8-1H-4yr"/>
-                            <constraint firstItem="U48-s9-fjT" firstAttribute="top" secondItem="5zz-mV-2Tg" secondAttribute="top" type="default" id="sIG-Rz-SOp"/>
-                            <constraint firstItem="U48-s9-fjT" firstAttribute="trailing" secondItem="5zz-mV-2Tg" secondAttribute="trailing" type="default" id="vRM-j3-OhB"/>
-                            <constraint firstItem="U48-s9-fjT" firstAttribute="bottom" secondItem="5zz-mV-2Tg" secondAttribute="bottom" type="default" id="w88-xZ-DWX"/>
-                        </constraints>
-                    </view>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackOpaque" id="4Ed-1C-Gtn">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="Ide-xh-sFp" id="DTq-6z-E5t"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="dSI-MI-QcF" style="IBUITableViewCellStyleDefault" id="5ka-fW-oe8">
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dSI-MI-QcF">
+                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Ide-xh-sFp" id="Lc4-zG-Btt"/>
+                            <outlet property="delegate" destination="Ide-xh-sFp" id="UUG-Xt-Ckh"/>
+                        </connections>
+                    </tableView>
                     <navigationItem key="navigationItem" id="luH-CG-MqH"/>
                     <connections>
+                        <outlet property="mySearchBar" destination="xcL-wq-eBT" id="nCe-jf-F4H"/>
                         <outlet property="tableView" destination="xcL-wq-eBT" id="Qta-2t-ikQ"/>
                     </connections>
                 </viewController>
@@ -481,7 +456,7 @@
             <objects>
                 <viewController storyboardIdentifier="Messages" title="Messages" useStoryboardIdentifierAsRestorationIdentifier="YES" id="c0Y-cM-jma" customClass="MPMessagesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2dA-gV-u9g">
-                        <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SKs-Vm-2wN">
@@ -756,9 +731,17 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Gqq-1T-PsK">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackOpaque" id="smP-mG-NPl">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="GIZ-XG-Gbo" id="f2Q-s8-m3x"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="clp-Ra-tL4" style="IBUITableViewCellStyleDefault" id="uch-YR-LRc">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -790,6 +773,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="FIx-WT-ZdM"/>
                     <connections>
+                        <outlet property="mySearchBar" destination="smP-mG-NPl" id="Bpb-Oj-kfG"/>
                         <outlet property="tableView" destination="Gqq-1T-PsK" id="I4j-g9-7j2"/>
                     </connections>
                 </viewController>
@@ -1737,189 +1721,6 @@
             <point key="canvasLocation" x="1890" y="1979"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="MPCarDataViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPCarDataViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneButtonClicked:"/>
-                <relationship kind="action" name="takePhotoButtonClicked:"/>
-                <relationship kind="action" name="uploadButtonClicked:"/>
-                <relationship kind="outlet" name="cityPicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="colorText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="engineText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="modelPicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="modelText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="modsText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="powerText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="regnumberText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="txtText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="uploadButtonClicked" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="MPEditCarViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPEditCarViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneButtonClicked:"/>
-                <relationship kind="action" name="takePhotoButtonClicked:"/>
-                <relationship kind="action" name="uploadButtonClicked:"/>
-                <relationship kind="outlet" name="cityPicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="colorText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="engineText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="modelPicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="modelText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="modsText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="powerText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="regnumberText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="txtText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="uploadButtonClicked" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="MPEditPersonalViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPEditPersonalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="nextButtonClicked:"/>
-                <relationship kind="action" name="saveEdit:"/>
-                <relationship kind="action" name="segmentedControlIndexChanged:"/>
-                <relationship kind="outlet" name="ageTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nextButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pickPasswordTextfield" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="pickUserNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="repeatPickPasswordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="screenNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="shortBioTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="MPFindScanViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPFindScanViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dismissKeyboard:"/>
-                <relationship kind="action" name="editingChanged:" candidateClass="UITextField"/>
-                <relationship kind="action" name="sendScan:"/>
-                <relationship kind="outlet" name="scanTextfield" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="sendScan" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="MPFriendListViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPFriendListViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="MPFriendViewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPFriendViewViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addFriend:"/>
-                <relationship kind="action" name="unfriend:"/>
-                <relationship kind="outlet" name="addFriendButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="ageLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="colorLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="engineLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="genderLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="makeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="modelLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="pozaFriend" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="regNumberLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="shortbioLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MPLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPLoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="SignInButtonClicked:"/>
-                <relationship kind="action" name="didChangeUsernameText:"/>
-                <relationship kind="action" name="dismissKeyboard:"/>
-                <relationship kind="action" name="loginButtonClicked:"/>
-                <relationship kind="outlet" name="LogInButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="SignInButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="signUpButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MPMainMenuViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPMainMenuViewController.h"/>
-        </class>
-        <class className="MPMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="mapview" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="MPMessageBoxViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPMessageBoxViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="MPMessagesViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPMessagesViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="textMessage" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MPPersonalDataViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPPersonalDataViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dismissKeyboard:"/>
-                <relationship kind="action" name="nextButtonClicked:"/>
-                <relationship kind="action" name="segmentedControlIndexChanged:"/>
-                <relationship kind="outlet" name="ageTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nextButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pickPasswordTextfield" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="pickUserNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="repeatPickPasswordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="screenNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="shortBioTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="theScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="MPSplashViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPSplashViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="acceptButtonClicked:"/>
-                <relationship kind="outlet" name="acceptButtonClicked" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="MPWhoAddedYouViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MPWhoAddedYouViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="acceptFriend:"/>
-                <relationship kind="action" name="rejectFriend:"/>
-                <relationship kind="outlet" name="addFriendButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="ageLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="colorLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="engineLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="genderLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="makeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="modelLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="pozaFriend" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="regNumberLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="shortbioLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="chatCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/chatCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="textString" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

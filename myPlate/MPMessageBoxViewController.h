@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MPMessageBoxViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface MPMessageBoxViewController : UIViewController<UISearchBarDelegate , UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (weak, nonatomic) IBOutlet UITableView *mySearchBar;
+@property (nonatomic , strong) NSMutableArray * initialNames;
+@property (nonatomic , strong) NSMutableArray * filteredNames;
+@property BOOL isFiltered;
 @end

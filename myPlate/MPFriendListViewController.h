@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MPFriendListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
-
+@interface MPFriendListViewController : UIViewController<UISearchBarDelegate, UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic , strong) NSMutableArray * initialNames;
+@property (nonatomic , strong) NSMutableArray * filteredNames;
+@property BOOL isFiltered;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *mySearchBar;
 
 @end

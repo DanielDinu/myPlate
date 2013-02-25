@@ -27,7 +27,7 @@
 
 -(void) keyboardWasShown:(NSNotification*)aNotification
 {
-    NSLog(@"Keyboard was shown");
+    //NSLog(@"Keyboard was shown");
     NSDictionary* info = [aNotification userInfo];
     
     // Get animation info from userInfo
@@ -42,8 +42,8 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
-    NSLog(@"frame..%f..%f..%f..%f",self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
-    NSLog(@"keyboard..%f..%f..%f..%f",keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
+    //NSLog(@"frame..%f..%f..%f..%f",self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    //NSLog(@"keyboard..%f..%f..%f..%f",keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
     [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y- keyboardFrame.size.height+TABBAR_HEIGHT, self.view.frame.size.width, self.view.frame.size.height)];
    
     [UIView commitAnimations];
@@ -52,7 +52,7 @@
 
 -(void) keyboardWillHide:(NSNotification*)aNotification
 {
-    NSLog(@"Keyboard will hide");
+    //NSLog(@"Keyboard will hide");
     NSDictionary* info = [aNotification userInfo];
     
     // Get animation info from userInfo
@@ -89,7 +89,7 @@
     return self;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	NSLog(@"%@",chatData);
+	//NSLog(@"%@",chatData);
     return [chatData count];
 }
 
@@ -137,7 +137,7 @@
     [textField resignFirstResponder];
    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"screen"];
     if (textMessage.text.length>0) {
-        NSLog(@"scrii");
+        //NSLog(@"scrii");
         // updating the table immediately
         NSArray *keys = [NSArray arrayWithObjects:@"text", @"userName", @"date", nil];
         NSArray *objects = [NSArray arrayWithObjects:textMessage.text, userName, [NSDate date], nil];
@@ -152,23 +152,8 @@
         [tableView endUpdates];
         //[tableView reloadData];
        
-        NSString *post2=[NSString stringWithFormat:@"user_ID1=%@&user_ID2=%@&mes=%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"userid"],[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"],textMessage.text];
-        NSLog(@"post string is: %@",post2);
-        NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
-        NSString *postLength2 = [NSString stringWithFormat:@"%d", [postData2 length]];
-        
-        NSMutableURLRequest *cerere2 = [[NSMutableURLRequest alloc] init];
-        [cerere2 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/im.php"]];
-        [cerere2 setHTTPMethod:@"POST"];
-        [cerere2 setValue:postLength2 forHTTPHeaderField:@"Content-Length"];
-        [cerere2 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        [cerere2 setHTTPBody:postData2];
-        NSURLResponse* response2 = nil;
-        NSError* error2=nil;
-        NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
-        NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
-        NSLog(@"reply string is : %@",replyString2);
+        //NSLog(@"reply string is : %@",replyString2);
            }
     textMessage.text = @"";
 
@@ -177,7 +162,7 @@
 }
 
 -(void)handleUpdatedData:(NSNotification *)notification {
-    NSLog(@"%@",notification);
+    //NSLog(@"%@",notification);
     NSObject *mesaj = [notification object];
 
     NSDictionary *aps1 = [NSDictionary dictionaryWithDictionary:(NSDictionary *) mesaj ];
@@ -197,12 +182,12 @@
             [[NSUserDefaults standardUserDefaults] setObject:id_who_added forKey:@"id_who_added_you"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            NSLog(@"id = %@",id_who_added);
+            //NSLog(@"id = %@",id_who_added);
             if([mesajPrimit isKindOfClass:[NSString class]]) {
                 
                 
                 NSString *post2=[NSString stringWithFormat:@"search=id&ID=%@",id_who_added];
-                NSLog(@"post string is: %@",post2);
+                //NSLog(@"post string is: %@",post2);
                 NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
                 
                 NSString *postLength2 = [NSString stringWithFormat:@"%d", [postData2 length]];
@@ -217,7 +202,7 @@
                 NSError* error2=nil;
                 NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
                 NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
-                NSLog(@"reply string is : %@",replyString2);
+                //NSLog(@"reply string is : %@",replyString2);
                 NSArray *prieteni_user = [replyString2 componentsSeparatedByString:@"*~*"];
                 NSString *numePrieten = [prieteni_user objectAtIndex:0];
                 
@@ -242,12 +227,13 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"numePrieten"]];
 
 }
 - (void)viewDidLoad
 {
-    [self setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"numePrieten"]];
+    NSLog(@"get: %@",[[NSUserDefaults standardUserDefaults] valueForKey:@"numePrieten"]);
+    [self setTitle:[[NSUserDefaults standardUserDefaults] stringForKey:@"numePrieten"]];
+
     [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"inMessages"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

@@ -7,18 +7,31 @@
 //
 #define AlertViewOne 1
 #define AlertViewTwo 2
-
 #import "MPAppDelegate.h"
 #import "Reachability.h"
 #import "MPLoginViewController.h"
 #import "MPFindScanViewController.h"
 #import "MPMessagesViewController.h"
+#import "MPWhoAddedYouViewController.h"
 @implementation MPAppDelegate
+
 @synthesize devTtrimis;
+
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    //Your Stuff
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.distanceFilter = 100.0f; // whenever we move
+    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+    locationManager.headingFilter = 5;
+    [locationManager startUpdatingLocation];
+    
     [application registerForRemoteNotificationTypes:
      UIRemoteNotificationTypeBadge |
      UIRemoteNotificationTypeAlert |
@@ -39,6 +52,8 @@
     // Let the device know we want to receive push notifications
     return YES;
 }
+
+
 ////////////////////////////////////////////////////////////////////////////////
 - (void)alertView:(UIAlertView *)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -51,9 +66,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         
-      
-        MPFindScanViewController *mpwho = [storyboard instantiateViewControllerWithIdentifier:@"whoAddedYou"];
-            _window.rootViewController = mpwho;}
+                  MPWhoAddedYouViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"whoAddedYou"];
+            
+            UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+            [navController.visibleViewController.navigationController pushViewController:myController animated:YES];          
+        }
     else if(alertView.tag == AlertViewTwo
             ) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
@@ -78,7 +95,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 NSString *verifLogat;
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
+{NSLog(@"primit");
     verifLogat = [[NSUserDefaults standardUserDefaults] valueForKey:@"logat"];
     if([verifLogat isEqualToString:@"yes"]){
         for (id key in userInfo) {

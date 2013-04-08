@@ -77,8 +77,8 @@ NSArray *nume_prieteni;
     NSArray *linie = [linie2 componentsSeparatedByString:@"~;~"];
     
     [[NSUserDefaults standardUserDefaults] setObject:[linie objectAtIndex:1] forKey:@"numePrieten"];
+    [[NSUserDefaults standardUserDefaults] setObject:[linie objectAtIndex:0] forKey:@"useridFriend"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"set: %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"numePrieten"]);
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle: nil];
@@ -90,7 +90,7 @@ NSMutableArray *cdy1;
 - (void)viewDidLoad
 {
     initialNames = [[NSMutableArray alloc]init];
-    [self setTitle:@"Messages"];
+   [self setTitle:@"Messages"];
 
     NSString *post3=[NSString stringWithFormat:@"ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]];
     //NSLog(@"post string is :%@",post3);

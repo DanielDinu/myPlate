@@ -42,17 +42,11 @@
     {
         
         // allow only alphanumeric chars
-        NSString* newStr = [sender.text stringByTrimmingCharactersInSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]];
-        
+        NSString* newStr = sender.text;
         if ([newStr length] < [sender.text length])
         {
             sender.text = newStr;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!"
-                                                            message:@"Registration number must be alphanumerical !"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
+            
         }
     }
 }
@@ -180,6 +174,7 @@
     NSLog(@"reply string is : %@",replyString2);
     
     NSArray *date_user = [replyString2 componentsSeparatedByString:@"*~*"];
+    [[NSUserDefaults standardUserDefaults] setObject:[date_user objectAtIndex:4] forKey:@"useridFriend"];
     if([[date_user objectAtIndex:0] isEqualToString:@"ERR"])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!"

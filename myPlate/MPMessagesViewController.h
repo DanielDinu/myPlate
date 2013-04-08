@@ -13,12 +13,13 @@
 {
     UITextField *textMessage;
     IBOutlet UITableView *tableView;
-    
+    NSMutableArray *consoleList;
    
 }
 @property (strong, nonatomic) IBOutlet UITextField *textMessage;
 @property (retain, nonatomic) UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *chatData;
+
 
 -(void) registerForKeyboardNotifications;
 -(void) freeKeyboardNotifications;

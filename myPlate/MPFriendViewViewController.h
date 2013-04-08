@@ -23,6 +23,9 @@
     __weak IBOutlet UIImageView *pozaFriend;
        
 }
+- (IBAction)toMainMenu:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *toMainMenu;
+@property (weak, nonatomic) IBOutlet UIButton *unfriendButton;
 @property (weak, nonatomic) IBOutlet UIButton *addFriendButton;
 - (IBAction)addFriend:(id)sender;
 - (IBAction)unfriend:(id)sender;

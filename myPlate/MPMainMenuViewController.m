@@ -15,7 +15,6 @@
 @implementation MPMainMenuViewController
 
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,7 +26,8 @@
 
 - (void)viewDidLoad
 {
-     self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.title=@"Main Menu";
+    self.navigationItem.hidesBackButton=YES;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
@@ -38,4 +38,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)logout:(id)sender {
+    
+    [[NSUserDefaults standardUserDefaults] setPersistentDomain:[NSDictionary dictionary] forName:[[NSBundle mainBundle] bundleIdentifier]];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
+    [self.navigationController pushViewController: myController animated:YES];
+    
+}
 @end

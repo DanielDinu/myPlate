@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface MPAppDelegate : UIResponder <UIApplicationDelegate>
+{CLLocationManager *locationManager;
+    NSObject *overlayView;
+}
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow *overlay;
+
 @property (strong, nonatomic) NSData *devTtrimis;
 
 @end

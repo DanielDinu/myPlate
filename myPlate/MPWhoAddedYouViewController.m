@@ -8,7 +8,7 @@
 
 #import "MPWhoAddedYouViewController.h"
 #import "MPMainMenuViewController.h"
-
+#import "MPFriendViewViewController.h"
 @interface MPWhoAddedYouViewController ()
 
 @end
@@ -129,14 +129,13 @@
     NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
         NSLog(@"reply string is : %@",replyString2);
            
-    MPMainMenuViewController *mpm = [[MPMainMenuViewController alloc] initWithNibName:nil bundle:nil];
-
-  [self.navigationController pushViewController:mpm animated:YES];
     
+    [self performSegueWithIdentifier:@"toMainMenu" sender:self];
+
 }
 
 - (IBAction)rejectFriend:(id)sender {
-    NSString *post2=[NSString stringWithFormat:@"tip=check&user_ID1=%@&user_ID2=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"],[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]];
+    NSString *post2=[NSString stringWithFormat:@"tip=delete&ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"id_prietenie"]];
     NSLog(@"post string is :%@",post2);
     NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
@@ -154,7 +153,8 @@
     NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
     NSLog(@"reply string is : %@",replyString2);
     
-    [addFriendButton setTitle:@"Add Friend" forState:UIControlStateNormal];
-    [addFriendButton setEnabled:YES];
+    [self performSegueWithIdentifier:@"toMainMenu" sender:self];
+
+    
 }
 @end

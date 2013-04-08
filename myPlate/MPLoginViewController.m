@@ -5,12 +5,15 @@
 //  Created by Daniel Dinu on 12/11/12.
 //  Copyright (c) 2012 Daniel Dinu. All rights reserved.
 //
-
+#define Waiting 1
 #import "MPLoginViewController.h"
 #import "MPMainMenuViewController.h"
 #import "Reachability.h"
 #import "MPEditPersonalViewController.h"
 #import "MPAppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
+#import "MPWaitingFriendRequestsViewController.h"
+
 
 @interface MPLoginViewController ()
 
@@ -143,6 +146,7 @@
 }
 - (void)viewDidLoad
 {
+    
     usernameTextField.text =@"dani";
     passwordTextField.text =@"daniel";
     Reachability *r = [Reachability reachabilityWithHostName:@"www.google.com"];
@@ -295,9 +299,61 @@ NSString *user_id;
         [[NSUserDefaults standardUserDefaults] setObject:[date_user2 objectAtIndex:7] forKey:@"picture"];
 
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self performSegueWithIdentifier:@"LoginToMenu" sender:self];
-       
-    }
+        
+        NSString *post2=[NSString stringWithFormat:@"ID=%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]];
+        NSLog(@"post string is :%@",post2);
+        NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        NSString *postLength2 = [NSString stringWithFormat:@"%d", [postData2 length]];
+        
+        NSMutableURLRequest *cerere2 = [[NSMutableURLRequest alloc] init];
+        [cerere2 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/list_requests.php"]];
+        [cerere2 setHTTPMethod:@"POST"];
+        [cerere2 setValue:postLength2 forHTTPHeaderField:@"Content-Length"];
+        [cerere2 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [cerere2 setHTTPBody:postData2];
+        NSURLResponse* response2 = nil;
+        NSError* error2=nil;
+        NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
+        NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
+        
+        NSLog(@"reply string is : %@",replyString2);
+        if(replyString2 == (id)[NSNull null] || replyString2.length == 0)
+        {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+            
+            MPMainMenuViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"MainMenu"];
+            
+            UINavigationController *navController = (UINavigationController *)self.navigationController;
+            [navController.visibleViewController.navigationController pushViewController:myController animated:YES];
+        }
+        else{
+        NSMutableArray *idPrieteni = [[NSMutableArray alloc]init];
+        NSArray *lista = [replyString2 componentsSeparatedByString:@"*~*"];
+        for (int i=0; i<[lista count]; i++) {
+            NSString *itemLista = [lista objectAtIndex:i];
+            NSArray *itemListaSpart = [itemLista componentsSeparatedByString:@"~;~"];
+            [idPrieteni addObject:[itemListaSpart objectAtIndex:0]];
+            NSLog(@"%@",idPrieteni);
+        [[NSUserDefaults standardUserDefaults] setObject:idPrieteni forKey:@"idPrieteni"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            
+        }
+        if(idPrieteni)
+        {
+            UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"Attention!"
+                                                            message:@"You have some waiting friend requests !"
+                                                           delegate:self
+                                                  
+                                                  cancelButtonTitle:@"Close"
+                                                  otherButtonTitles:@"Show",nil];
+            
+            //alert1.tag =Waiting;
+            [alert1 show];
+        }
+        
+        }}
+    
     else if([output isEqualToString:@"ERR"])
     { 
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!"
@@ -317,8 +373,33 @@ NSString *user_id;
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
+    
     [alert show];
     
 }
 }
+
+- (void)alertView:(UIAlertView *)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 1)
+        {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+            
+            MPWaitingFriendRequestsViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"Waiting"];
+            
+            UINavigationController *navController = (UINavigationController *)self.navigationController;
+            [navController.visibleViewController.navigationController pushViewController:myController animated:YES];
+        
+        }
+    
+    else{
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        
+        MPMainMenuViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"MainMenu"];
+        
+        UINavigationController *navController = (UINavigationController *)self.navigationController;
+        [navController.visibleViewController.navigationController pushViewController:myController animated:YES];
+    }}
+
 @end

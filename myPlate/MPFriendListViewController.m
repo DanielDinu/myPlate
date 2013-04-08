@@ -7,6 +7,7 @@
 //
 
 #import "MPFriendListViewController.h"
+#import "MPFriendViewViewController.h"
 
 @interface MPFriendListViewController ()
 {NSArray *foo;}
@@ -80,6 +81,9 @@ NSArray *nume_prieteni;
     [[NSUserDefaults standardUserDefaults] setObject:[prieteni_user objectAtIndex:4] forKey:@"useridFriend"];
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle: nil];
+    MPFriendViewViewController *mpf = [storyboard instantiateViewControllerWithIdentifier:@"FriendView"];
+    [self.navigationController pushViewController:mpf animated:YES];
 }
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -88,7 +92,7 @@ NSMutableArray *cdy1;
 - (void)viewDidLoad
 {
     initialNames = [[NSMutableArray alloc]init];
-    [self setTitle:@"Messages"];
+    [self setTitle:@"Friend list"];
     
     NSString *post3=[NSString stringWithFormat:@"ID=%@", [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]];
     //NSLog(@"post string is :%@",post3);
@@ -107,6 +111,11 @@ NSMutableArray *cdy1;
     NSData *serverReply3 = [NSURLConnection sendSynchronousRequest:cerere3 returningResponse:&response3 error:&error3];
     NSString *replyString3 = [[NSString alloc] initWithBytes:[serverReply3 bytes] length:[serverReply3 length] encoding: NSASCIIStringEncoding];
     //NSLog(@"reply string is : %@",replyString3);
+    
+   if(replyString3 == (id)[NSNull null] || replyString3.length == 0)
+   {NSLog(@"niciun prieten");}
+   else{
+    
     prieteni_user = [replyString3 componentsSeparatedByString:@"*~*"];
     NSMutableArray* tempArray = [NSMutableArray array];
     [prieteni_user enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) { [tempArray addObject:obj]; }];
@@ -116,7 +125,7 @@ NSMutableArray *cdy1;
         NSString *linie2 = [foo objectAtIndex:i];
         NSArray *linie = [linie2 componentsSeparatedByString:@"~;~"];
         [cdy1 addObject:[linie objectAtIndex:1]];}
-    initialNames = [cdy1 copy];
+       initialNames = [cdy1 copy];}
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     

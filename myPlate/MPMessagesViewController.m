@@ -152,7 +152,23 @@
         [tableView endUpdates];
         //[tableView reloadData];
        
+        NSString *post2=[NSString stringWithFormat:@"user_ID1=%@&user_ID2=%@&mes=%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"userid"],[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"],textMessage.text];
+        NSLog(@"post string is: %@",post2);
+        NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
+        NSString *postLength2 = [NSString stringWithFormat:@"%d", [postData2 length]];
+        
+        NSMutableURLRequest *cerere2 = [[NSMutableURLRequest alloc] init];
+        [cerere2 setURL:[NSURL URLWithString:@"http://thewebcap.com/dev/ios/im.php"]];
+        [cerere2 setHTTPMethod:@"POST"];
+        [cerere2 setValue:postLength2 forHTTPHeaderField:@"Content-Length"];
+        [cerere2 setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [cerere2 setHTTPBody:postData2];
+        NSURLResponse* response2 = nil;
+        NSError* error2=nil;
+        NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
+        NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
+        NSLog(@"reply string is : %@",replyString2);
         //NSLog(@"reply string is : %@",replyString2);
            }
     textMessage.text = @"";
@@ -231,7 +247,7 @@
 }
 - (void)viewDidLoad
 {
-    NSLog(@"get: %@",[[NSUserDefaults standardUserDefaults] valueForKey:@"numePrieten"]);
+    consoleList = [[NSMutableArray alloc]init];
     [self setTitle:[[NSUserDefaults standardUserDefaults] stringForKey:@"numePrieten"]];
 
     [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"inMessages"];

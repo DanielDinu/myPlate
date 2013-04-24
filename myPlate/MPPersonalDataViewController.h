@@ -11,6 +11,7 @@
 @interface MPPersonalDataViewController : UIViewController<UITextFieldDelegate>
 {
     
+    __weak IBOutlet UITextField *mailTextbox;
     MPCarDataViewController *mpcardata;
     
     IBOutlet UITextField *screenNameTextField;

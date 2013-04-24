@@ -278,7 +278,7 @@
 NSString *DeTrimis;
 - (IBAction)nextButtonClicked:(id)sender {
     
-    NSString *post2=[NSString stringWithFormat:@"user=%@&pass=%@&screen=%@&age=%@&sex=%@&bio=%@",pickUserNameTextField.text,pickPasswordTextfield.text,screenNameTextField.text,ageTextField.text,segmentedString,shortBioTextField.text];
+    NSString *post2=[NSString stringWithFormat:@"user=%@&pass=%@&screen=%@&age=%@&sex=%@&bio=%@&mail=%@",pickUserNameTextField.text,pickPasswordTextfield.text,screenNameTextField.text,ageTextField.text,segmentedString,shortBioTextField.text,mailTextbox.text];
     NSLog(@"post string is :%@",post2);
     NSData *postData2 = [post2 dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
@@ -326,5 +326,9 @@ NSString *segmentedString;
         default:
             break;
     }
+}
+- (void)viewDidUnload {
+    mailTextbox = nil;
+    [super viewDidUnload];
 }
 @end

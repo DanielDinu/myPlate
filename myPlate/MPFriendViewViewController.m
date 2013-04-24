@@ -48,7 +48,6 @@
     NSData *serverReply2 = [NSURLConnection sendSynchronousRequest:cerere2 returningResponse:&response2 error:&error2];
     NSString *replyString2 = [[NSString alloc] initWithBytes:[serverReply2 bytes] length:[serverReply2 length] encoding: NSASCIIStringEncoding];
     NSLog(@"reply string is : %@",replyString2);
-    NSArray *prieteni_user1 = [replyString2 componentsSeparatedByString:@"*~*"];
     
     NSArray *date_user = [replyString2 componentsSeparatedByString:@"*~*"];
         [[NSUserDefaults standardUserDefaults] setObject:[date_user objectAtIndex:4] forKey:@"useridFriend"];
@@ -93,7 +92,6 @@
     NSString *replyString3 = [[NSString alloc] initWithBytes:[serverReply3 bytes] length:[serverReply3 length] encoding: NSASCIIStringEncoding];
     NSLog(@"reply string is : %@",replyString3);
     
-    NSArray *prieteni_user = [replyString3 componentsSeparatedByString:@"*~*"];
     NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]);
     if ([replyString3 rangeOfString:[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]].location != NSNotFound) {
         NSLog(@"Yes it does contain that word");

@@ -94,8 +94,6 @@
     NSString *replyString3 = [[NSString alloc] initWithBytes:[serverReply3 bytes] length:[serverReply3 length] encoding: NSASCIIStringEncoding];
     NSLog(@"reply string is : %@",replyString3);
     
-    NSArray *prieteni_user = [replyString3 componentsSeparatedByString:@"*~*"];
-    BOOL exista = [prieteni_user containsObject:[[NSUserDefaults standardUserDefaults] valueForKey:@"useridFriend"]];
     /*if(exista)
     {[addFriendButton setTitle:@"Friend" forState:UIControlStateNormal];
         [addFriendButton setEnabled:NO];}*/

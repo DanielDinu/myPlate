@@ -14,23 +14,27 @@
 #import "MPMessagesViewController.h"
 #import "MPWhoAddedYouViewController.h"
 @implementation MPAppDelegate
-
+@synthesize viewController = _viewController;
 @synthesize devTtrimis;
+@synthesize session = _session;
+@synthesize window = _window;
 
 
--(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    //Your Stuff
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [self.session handleOpenURL:url];
 }
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.distanceFilter = 100.0f; // whenever we move
-    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
-    locationManager.headingFilter = 5;
-    [locationManager startUpdatingLocation];
+    
     
     [application registerForRemoteNotificationTypes:
      UIRemoteNotificationTypeBadge |
@@ -203,14 +207,23 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    /*
+     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+     */
+    
+    // FBSample logic
+    // We need to properly handle activation of the application with regards to SSO
+    //  (e.g., returning from iOS 6.0 authorization dialog or from fast app switching).
+ [FBSession.activeSession handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    [self.session close];
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
 
 @end

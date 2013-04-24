@@ -10,14 +10,34 @@
 
 @interface MPLoginViewController : UIViewController<UITextFieldDelegate>
 {
+    UIColor     *strokeColor;
+    UIColor     *rectColor;
+    CGFloat     strokeWidth;
+    CGFloat     cornerRadius;
+    
     NSData *devToken;
-    IBOutlet UIScrollView *theScrollView;
-    UITextField *activeTextField;
-}
+    
+
+    }
+
+
+#define kDefaultStrokeColor         [UIColor whiteColor]
+#define kDefaultRectColor           [UIColor whiteColor]
+#define kDefaultStrokeWidth         1.0
+#define kDefaultCornerRadius        30.0
+@property(weak, nonatomic)  UITextField *activeTextField;
+@property(strong, nonatomic)  UITextField *usernameTextField;
+@property(strong, nonatomic)  UITextField *passwordTextField;
+@property(weak, nonatomic) UIScrollView *theScrollView;
+
+@property (nonatomic, retain) UIColor *strokeColor;
+@property (nonatomic, retain) UIColor *rectColor;
+@property CGFloat strokeWidth;
+@property CGFloat cornerRadius;
+
 - (IBAction)dismissKeyboard:(id)sender;
 @property (strong, nonatomic) NSData *tokenDev;
-@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+//@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 - (IBAction)didChangeUsernameText:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (weak, nonatomic) IBOutlet UIButton *LogInButton;

@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <FacebookSDK/FacebookSDK.h>
+#import "MPLoginViewController.h"
 @interface MPAppDelegate : UIResponder <UIApplicationDelegate>
 {CLLocationManager *locationManager;
     NSObject *overlayView;
+    
+    
 }
 
+@property (strong, nonatomic) MPLoginViewController *viewController;
+@property (strong, nonatomic) FBSession *session;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIWindow *overlay;
-
 @property (strong, nonatomic) NSData *devTtrimis;
-
 @end

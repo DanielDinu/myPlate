@@ -11,5 +11,7 @@
 @interface MPSplashViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *acceptButtonClicked;
 - (IBAction)acceptButtonClicked:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *toaLabel;
+
 
 @end

@@ -8,6 +8,9 @@
 
 #import "MPMainMenuViewController.h"
 #import "MPEditPersonalViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import "MPAppDelegate.h"
+#import "MPLoginViewController.h"
 @interface MPMainMenuViewController ()
 
 @end
@@ -39,12 +42,17 @@
 }
 
 - (IBAction)logout:(id)sender {
-    
-    [[NSUserDefaults standardUserDefaults] setPersistentDomain:[NSDictionary dictionary] forName:[[NSBundle mainBundle] bundleIdentifier]];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+      		    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
-    [self.navigationController pushViewController: myController animated:YES];
+   
+    [FBSession.activeSession closeAndClearTokenInformation];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     
+    MPMainMenuViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"Login"];
+    
+    UINavigationController *navController = (UINavigationController *)self.navigationController;
+    [navController.visibleViewController.navigationController pushViewController: myController animated:YES];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+
 }
 @end
